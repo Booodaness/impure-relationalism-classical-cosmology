@@ -1,0 +1,139 @@
+% SYMBOLS
+
+% Display
+\newcommand{\cp}{\clearpage}
+\newcommand{\pb}{\pagebreak}
+
+\newcommand{\dis}{\displaystyle}
+
+% First-order logic
+\newcommand{\exi}{\exists \:}
+\newcommand{\fa}{\forall \:}
+\newcommand{\Ra}{\Rightarrow}
+
+% Algebra
+\newcommand{\ca}{\cancel}
+\newcommand{\rsa}{\rightsquigarrow}
+
+% Set theory
+% (Special sets)
+\newcommand{\es}{\emptyset}
+\newcommand{\N}{\mb{N}}
+\newcommand{\Z}{\mb{Z}}
+\newcommand{\Q}{\mb{Q}}
+\newcommand{\R}{\mb{R}}
+\newcommand{\C}{\mb{C}}
+
+% (Operators)
+\newcommand{\bs}{\backslash}
+\newcommand{\mb}{\mathbb}
+\newcommand{\mc}{\mathcal}
+
+% SYMBOL SCHEMAS
+
+% Display
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\Blue}[1]{\boxed{\blue{#1}}}
+\newcommand{\plue}[1]{\textcolor{blue}{\pmb{#1}}}
+
+\newcommand{\qua}[1]{\blue{#1} \:}
+
+% Algebra
+\newcommand{\canc}[2]{\tensor[^{#2}]{\cancel{#1}}{}}
+
+% Bracket-based clusters
+\newcommand{\p}[1]{\left( #1 \right)}
+\newcommand{\s}[1]{\left[ #1 \right]}
+\newcommand{\B}[1]{\left\{ #1 \right\}}
+\newcommand{\pmat}[1]{\begin{pmatrix}
+#1
+\end{pmatrix}}
+\newcommand{\smat}[1]{\begin{bmatrix}
+#1
+\end{bmatrix}}
+\newcommand{\bmat}[1]{\begin{Bmatrix}
+#1
+\end{Bmatrix}}
+
+\newcommand{\ucorn}[1]{\overset{\left\ulcorner \enspace \hphantom{#1} \enspace \right\urcorner}{#1}}
+\newcommand{\lcorn}[1]{\overset{\left\llcorner \enspace \hphantom{#1} \enspace \right\lrcorner}{#1}}
+
+% Modifiers
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\wt}[1]{\widetilde{#1}}
+
+% Set theory
+
+% (Construction)
+\newcommand{\set}[2]{\left\{ \vphantom{#2} #1 \right\rvert \left. \hspace{-2.3pt} \vphantom{#1} #2 \right\}}
+\newcommand{\bsl}[2]{\left. \left\{ #1 \right\} \middle\bs \left\{ #2 \right\} \right.}
+\newcommand{\bslset}[4]{\left. \set{#1}{#2} \middle\bs \set{#3}{#4} \right.}
+\newcommand{\tup}[2]{\left( #1 \right\rvert \left. \hspace{-2.3pt} \vphantom{#1} #2 \right)}
+
+% (Operators)
+\newcommand{\pow}[1]{\mc{P}\p{#1}}
+
+\newcommand{\im}[2]{\text{im}_{#1}\p{#2}}
+\newcommand{\preim}[2]{\text{preim}_{#1}\p{#2}}
+
+\newcommand{\id}[1]{\text{id}_{#1}}
+
+% Structures
+
+% (Geometry)
+\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle}
+\newcommand{\norm}[1]{\left\lvert #1 \right\rvert}
+
+% Group theory
+
+% (Operators)
+\newcommand{\gen}[1]{\left\langle #1 \right\rangle}
+\newcommand{\ord}[1]{\text{ord}\p{#1}}
+\newcommand{\ordg}[2]{\text{ord}_{#1}\p{#2}}
+
+% (Special groups)
+\newcommand{\D}[2]{\text{D}_{#1}\p{#2}}
+\newcommand{\GL}[2]{\text{GL}_{#1}\p{#2}}
+\newcommand{\Or}[2]{\text{Or}_{#1}\p{#2}}
+\newcommand{\SL}[2]{\text{SL}_{#1}\p{#2}}
+\newcommand{\SO}[2]{\text{SO}_{#1}\p{#2}}
+\newcommand{\SU}[2]{\text{SU}_{#1}\p{#2}}
+
+% Category theory
+
+% (Special categories)
+\newcommand{\Cat}{\text{Cat}}
+\newcommand{\Field}{\text{Field}}
+\newcommand{\Grp}{\text{Grp}}
+\newcommand{\Grph}{\text{Grph}}
+\newcommand{\Met}{\text{Met}}
+\newcommand{\Meas}{\text{Meas}}
+\newcommand{\Mon}{\text{Mon}}
+\newcommand{\Ord}{\text{Ord}}
+\newcommand{\Ring}{\text{Ring}}
+\newcommand{\Set}{\text{Set}}
+\newcommand{\Top}{\text{Top}}
+
+\newcommand{\Man}[1]{\text{Man}^{#1}}
+\newcommand{\Mod}[1]{{#1}-\text{Mod}}
+\newcommand{\Vect}[1]{\text{Vekt}_{#1}}
+
+% (Operations)
+\newcommand{\mor}[1]{\text{mor}\p{#1}}
+\newcommand{\ob}[1]{\text{ob}\p{#1}}
+
+% (Special morphisms)
+% [On categories]
+\newcommand{\aut}[1]{\text{aut}\p{#1}}
+\newcommand{\epi}[1]{\text{epi}\p{#1}}
+\newcommand{\inaut}[1]{\text{inn}\p{#1}}
+\newcommand{\iso}[1]{\text{iso}\p{#1}}
+\newcommand{\mono}[1]{\text{mono}\p{#1}}
+
+% [On object pairs]
+\newcommand{\Aut}[2]{\text{Aut}\p{#1, #2}}
+\newcommand{\Epi}[2]{\text{Epi}\p{#1, #2}}
+\newcommand{\Hom}[2]{\text{Hom}\p{#1, #2}}
+\newcommand{\Inaut}[2]{\text{Inn}\p{#1, #2}}
+\newcommand{\Iso}[2]{\text{Iso}\p{#1, #2}}
+\newcommand{\Mono}[2]{\text{Mono}\p{#1, #2}}

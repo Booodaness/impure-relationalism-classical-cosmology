@@ -1,0 +1,280 @@
+% Gemini theme
+% https://github.com/anishathalye/gemini
+%
+% We try to keep this Overleaf template in sync with the canonical source on
+% GitHub, but it's recommended that you obtain the template directly from
+% GitHub to ensure that you are using the latest version.
+
+\documentclass[final]{beamer}
+
+% ====================
+% Packages
+% ====================
+
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage[size=custom,width=120,height=72,scale=1.0]{beamerposter}
+\usetheme{gemini}
+\usecolortheme{gemini}
+\usepackage{bigints}
+\usepackage{booktabs}
+\usepackage{epigraph}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+\usepackage{hhline}
+\usepackage{hyperref}
+\hypersetup{
+colorlinks=true,
+linkcolor=cyan,    
+urlcolor=magenta,
+pdftitle={Impure Relationalism in Classical Cosmology},
+}
+\usepackage{lmodern}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.14}
+\usepackage{soul}
+\usepackage{tcolorbox}
+\usepckage{tensor}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage[normalem]{ulem}
+
+\newenvironment{highlight}
+{\begin{tcolorbox}[colback=lightblue, boxrule=0pt, frame empty]}
+{\end{tcolorbox}}
+
+\include{commands}
+
+% ====================
+% Lengths
+% ====================
+
+% If you have N columns, choose \sepwidth and \colwidth such that
+% (N+1)*\sepwidth + N*\colwidth = \paperwidth
+\newlength{\sepwidth}
+\newlength{\colwidth}
+\setlength{\sepwidth}{0.025\paperwidth}
+\setlength{\colwidth}{0.3\paperwidth}
+
+\setlength\epigraphwidth{\colwidth}
+
+\newcommand{\separatorcolumn}{\begin{column}{\sepwidth}\end{column}}
+
+\newcommand{\bs}{\backslash}
+\newcommand{\ca}{\cancel}
+\newcommand{\dis}{\displaystyle}
+\newcommand{\ex}{\exists \:}
+\newcommand{\fa}{\forall \:}
+\newcommand{\im}{\text{im}}
+\newcommand{\mb}{\mathbb}
+\newcommand{\mc}{\mathcal}
+\newcommand{\mf}{\mathfrak}
+\newcommand{\preim}{\text{preim}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\sing}{\text{Sing}}
+
+\newcommand{\inc}[1]{\xhookrightarrow{#1}}
+\newcommand{\mor}[1]{\xrightarrow{#1}}
+\newcommand{\lmor}[1]{\xrightarrow[#1]}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+% ====================
+% Title
+% ====================
+
+\title{Impure Relationalism in Classical Cosmology: Towards Energetic Causal Sets}
+
+\author{Siddhartha Bhattacharjee}
+
+\institute[shortinst]{University of Waterloo}
+
+% ====================
+% Footer (optional)
+% ====================
+
+\footercontent{
+Blog (Tempus Spatium): \href{https://booodaness.github.io/tempus-spatium/}{https://booodaness.github.io/tempus-spatium/} \hfill
+\href{https://cupc.cap.ca/}{Canadian Undergraduate Physics Conference} 2024, University of British Columbia \hfill
+Email: \href{mailto:s3bhatta@uwaterloo.ca}{s3bhatta@uwaterloo.ca}}
+% (can be left out to remove footer)
+
+% ====================
+% Logo (optional)
+% ====================
+
+% use this to include logos on the left and/or right side of the header:
+% \logoright{\includegraphics[height=7cm]{logo1.pdf}}
+% \logoleft{\includegraphics[height=7cm]{logo2.pdf}}
+
+% ====================
+% Body
+% ====================
+
+\begin{document}
+
+\begin{frame}[t]
+\begin{columns}[t]
+\separatorcolumn
+
+\begin{column}{\colwidth}
+
+\epigraph{\textit{Nature exists only once. It is only our schematizing reproduction that creates equal cases. It is only in those that there exists mutual dependence of certain qualities.}}{Ernst Mach}
+
+\begin{block}{Containment axioms}
+\begin{alertblock}{Property containment}
+Suppose $X, Y$ are in $\Set$. A property $Q$ on $X \times Y$ can be a \textbf{containment} of a property $P$ on $X$ in the following sense,
+
+$$\qua{\fa P \in 2^X \: \fa Q \in 2^{X \times Y} :} \: Q \rhd P : \equiv \exi y \in Y : \fa x \in X : Q(x, y) \iff P(x)$$
+
+We can recursively, using Cartesian products, extend the above definition to that of a $(X)^N = (X_1 \times \cdots \times X_N)$-property containing a $(X)^{N-k} = (X_1 \times \cdots \times X_{N-k})$-property,
+
+\begin{align*}
+\qua{\fa P \in 2^{(X)^{N-k}} \: \fa Q \in 2^{(X)^N} :} \: Q \rhd P & : \equiv \exi (x')_{N-k+1}^{N} \in (X)_{N-k+1}^{N} : \fa (x)^{N-k} \in (X)^{N-k} \\
+& : Q((x)^{N-k} * (x')_{N-k+1}^N) \iff P((x)^{N-k})
+\end{align*}
+
+where $(x)_k^{k+l}$ denotes elements of $(X)_k^{k+l} = X_k \times \cdots \times X_{k+l}$ and $*$ is tuple concatenation.
+\end{alertblock}
+
+Informally, an $N$-parameter predicate $Q$ contains an $(N-k)$-parameter predicate $P$ iff it is possible to set the last $k$ parameters of $Q$ such that the new $(N-k)$-parameter predicate obtained via the free parameters of $Q$, is identical to $P$. \emph{If the said $k$ parameters can be arbitrarily set, $Q$ is said to be a \textbf{trivial containment} of $P$},
+
+\begin{alertblock}{Trivial containment}
+\begin{align*}
+\qua{\fa P \in 2^{(X)^{N-k}} \: \fa Q \in 2^{(X)^N} :} & Q \unrhd P : \equiv \fa R \in [Q] : R \rhd P \text{ where,} \\
+\qua{\fa Q, R \in 2^{(X)^N} :} & Q \sim R : \equiv \exi \underset{\text{(proj)}}{\pi} \in \p{(X)^N \to (X)^{N-k}} \\
+& : \fa U, V \subseteq (X)^N : \p{\pi(U) = \pi(V)} \implies \p{Q \big\vert_U = R \big\vert_V}
+\end{align*}
+\end{alertblock}
+
+Intuitively, the mechanism of the above axiom is that $\pi$ forgets the last $k$ parameters of $Q$, and if this does not change its extension which is modelled by $P$, then $Q$ trivially contains $P$. This allows us to \emph{'compress' any given $Q$ to some maximal \textbf{reduction} $\kappa(Q)$ with the same extensional information},
+
+\begin{alertblock}{Property reduction}
+\begin{align*}
+\qua{\fa Q \in 2^{(X)^N} : \fa P \in \bigcup\limits_{k=0}^{N} 2^{(X)^k} :} & P \unrhd \kappa(Q) \\
+\qua{\fa Q \in 2^{(X)^N} : \fa d \in \N :} & \p{\dim(Q) = d} : \iff \exi (Y)^d \subseteq (X)^N : \p{\kappa(Q) \in 2^{(Y)^d}}
+\end{align*}
+\end{alertblock}
+\end{block}
+
+where $(Y)^d \subseteq (X)^N$ denotes ordered string inclusion. Remarkably, \blue{$\p{\frac{\bigcup\limits_{k=0}^{N} 2^{(X)^k}}{\sim}, \succeq}$ \textbf{is a poset}}, where $\succeq$ is the operation induced by quotienting by $\unrhd$. 
+
+\newline
+
+By Zorn's lemma, \plue{every property has a unique reduction and dimension}.
+
+\end{column}
+
+\separatorcolumn
+
+\begin{column}{\colwidth}
+
+\begin{block}{Intrinsic and relational properties}
+A property $Q \in 2^{(X)^N}$ is \textbf{$x_k$-intrinsic} for some $x_k \in X_k$ iff $Q(\bullet, \dots, \bullet, x_k, \bullet, \dots, \bullet)$ $\kappa$-reduces to some $P \in 2^{X_k}$,
+
+\begin{alertblock}{Intrinsic properties as locally reducible}
+\begin{align*}
+\qua{\fa Q \in 2^{(X)^N}} & \qua{: \fa k \leq N : \fa x_k \in X_k} : Q \in \mc{I}_k(x_k) \\ 
+: \iff \exi P \in 2^{X_k} & : P = \kappa(Q(\bullet, \dots, \bullet, x_k, \bullet, \dots, \bullet))
+\end{align*}
+\end{alertblock}
+
+On the other hand, $Q$ is relational with respect to $(x_{k_1}, \dots, x_{k_d}) = (y)^d \in (Y)^d \subseteq (X)^N$ when,
+
+\begin{alertblock}{Locally relational properties}
+\begin{align*}
+\qua{\fa Q \in 2^{(X)^N}} & \qua{: \fa d \in \N : \fa (Y)^d \subseteq (X)^N : \fa (x)^{(k)^d} \in (Y)^d :} Q \in \mc{R}_{k_1 \dots k_d}(x_{k_1}, \dots, x_{k_d}) \\ 
+& : \iff \exi P \in 2^{(Y)^d} : P = \kappa(Q(\bullet, \dots, \bullet, x_{k_1}, \bullet, \dots, \bullet, x_{k_2}, \bullet, \dots, \bullet, x_{k_d}, \bullet, \dots, \bullet))
+\end{align*}
+\end{alertblock}
+
+\blue{Due to the partial ordering properties of $\kappa$-reduction under appropriate bound variable quotienting, the rightmost existential clauses in the above definitions also turn out to involve \emph{uniqueness}}.
+\end{block}
+
+\begin{block}{Spatiotemporal locality}
+In an event ontology, let $(X, \mc{O})$ be a topological space of events equipped with a \pmb{temporal partial ordering} $\preceq \in 2^{X \times X}$ and \pmb{causal structure} $\to \in 2^{X \times X}$. \textbf{Spatial locality} is the statement that \emph{for every pair of events with $x \to z$, there exists a causally relevant step $y$ for every open neighbourhood containing $x, y$},
+
+\begin{highlight}
+\begin{align*}
+\qua{\fa x, z \in X :} S(x, z) & : \equiv \fa U \in \mc{O} : x, z \in U \implies \exi y \in U : x \to y \to z \\
+S_X & : \equiv \qua{\fa x, z \in X :} x \to z \implies S(x, z)
+\end{align*}
+\end{highlight}
+
+Similarly, \textbf{temporal locality} is the requirement that \emph{for every pair of causally linked events $x \to z$, it must be that $x \preceq z$ and the interval $[x, z] = \set{y \in X}{x \preceq y \preceq z}$ forms a \textbf{causal chain}},
+
+\begin{highlight}
+\begin{align*}
+\qua{\fa x, z \in X :} T(x, z) & : \equiv (x \preceq z) \land \p{\fa y \in [x, z] : x \to y \to z} \\
+T_X & : \equiv \qua{\fa x, z \in X :} (x \to z) \implies T(x, z)
+\end{align*}
+\end{highlight}
+
+Lastly, \textbf{spatiotemporal locality} is the \emph{simultaneous requirement of spatial and temporal locality for each pair of points with either property},
+
+\begin{highlight}
+$$H_X : \equiv \qua{\fa x, z \in X :} (x \to z) \implies \s{S(x, z) \iff T(x, z)}$$
+\end{highlight}
+
+It follows from $T_X$ that $(X, \to)$ is a poset. If we prevent self-causation, it follows that $X$ is necessarily infinite. To prevent this restriction, one can upgrade $(X, \to)$ to a \textbf{causal set}, with the additional property of \textbf{local finiteness} $L_X$ i.e., \emph{every chain $[x, z]_{\to}$ is finite}.
+
+The structure of a causal set $X$ with spatiotemporal locality is sufficiently characterized by the following,
+
+\begin{alertblock}{Causation as primitive in causal sets}
+$$L_X \land H_X \implies \begin{cases}
+\mc{O} & = \set{[x, z]_{\to}}{x, z \in X} \\
+\qua{\fa x, z \in X :} x \preceq z : & \equiv [x, z]_{\to} \neq \es 
+\end{cases}$$
+\end{alertblock}
+\end{block}
+
+\end{column}
+
+\separatorcolumn
+
+\begin{column}{\colwidth}
+
+\begin{block}{Locality in second-order causation}
+On top of causal set structure, one can have \textbf{property causation}, i.e., mechanisms of the form,
+
+$$P(\bullet, \dots, \bullet, x_k, \bullet, \dots, \bullet) \to Q(\bullet, \dots, \bullet, z_l, \bullet, \dots, \bullet)$$
+
+with the parameters being from topological spaces $(X_1, \mc{O}_1), \dots, (X_N, \mc{O}_N)$. To prevent trivial locality in the form of LHS and RHS being a local matter of fact at $z_l$, property locality must restrict $P$ to be $x_k$-intrinsic and $Q$ to be $z_l$-intrinsic, respectively,
+
+\begin{alertblock}{Intrinsic residue in property causation}
+The locality of $P(\dots, x_k, \dots) \to Q(\dots, z_l, \dots)$ is truth-evaluable iff $P \in \mc{I}_k(x_k)$ and $Q \in \mc{I}_l(z_l)$.
+\end{alertblock}
+
+Let us now see how \blue{classical dynamics hints at energy and momentum being the primitive intrinsic properties of a second-order causal set}.
+\end{block}
+
+\begin{block}{Relationalism in dynamical pairings}
+Let $(X, \omega)$ be a symplectic manifold yielding the usual Poisson bracket $\{ \cdot, \cdot \}$. Given a Lagrangian $L$, position and conjugate momentum are \textbf{dynamically paired} on-shell, $\{ x^i, p_j \} = \delta\indices{^i_j}$. Noether's theorem leads to \plue{momenta being generators of translations}: if $x^i \to x^i + \delta x^i$, then, for a quantity $A(x^i, p_j)$, if $\delta A = \{ A, \delta G \}$, then $\exi \epsilon \in \R^+ : \delta G = \epsilon p_i$ i.e. $\delta A = \epsilon \{ A, p_i \}$. Similarly, \plue{energy is the generator of time-evolution}: $\delta G = \epsilon H$ implies that $\delta A = \epsilon \{ A, H \}$.
+
+Consequently, since $\delta x^i$ is $X$-relational, $p_j$ is $P$-relational. \plue{But this only holds at the subsystem level}. In a cosmological setting, \emph{there can be no $X$-symmetries as any $x, y \in X$ are distinct iff they differ by intrinsic and relational properties},
+
+\begin{alertblock}{Principle of identity of indiscernibles}
+\begin{align*}
+\qua{\fa k \leq N : \fa x_k, y_k \in X_k :} (x_k = y_k) & : \equiv \fa P \in \mc{R}_{\dots, k, \dots}(\dots, x_k, \dots) \cap \mc{R}_{\dots, k, \dots}(\dots, y_k, \dots) \\
+& : P(\dots, x_k, \dots) \iff P(\dots, y_k, \dots)
+\end{align*}
+\end{alertblock}
+
+Therefore, to model global dynamics on a causal set, \textbf{momentum and energy must be locally intrinsic properties}! This motivates the energetic causal set program, in which energy and momentum live as intrinsic quantities with causal efficacy on the nodes of $X$, and $\to$ dictates dynamics.
+\end{block}
+
+\begin{block}{References}
+\nocite{*}
+\footnotesize{\bibliographystyle{plain}\bibliography{poster}}
+\end{block}
+
+\end{column}
+
+\end{columns}
+\end{frame}
+
+\end{document}
